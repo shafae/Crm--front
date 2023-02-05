@@ -1,0 +1,36 @@
+<div class="container">
+  <h2 class="my-5">Payments</h2>
+
+  <h1 class="my-5" *ngIf="!showFlag">{{message}}</h1>
+<table class="table" *ngIf="showFlag">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">payMethod</th>
+      <th scope="col">numOfYears</th>
+      <th scope="col">paid</th>
+      <th scope="col">left</th>
+      <th scope="col" *ngIf="role!='client'">edit</th>
+      <th scope="col" *ngIf="role!='client'">delete</th>
+      <th scope="col">generate PDF</th>
+      <th scope="col">Show PDF</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let one of payments, let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{one.payMethod}}</td>
+      <td>{{one.numOfYears}}</td>
+      <td>{{one.paid}}</td>
+      <td>{{one.left}}</td>
+      <td *ngIf="role!='client'"><button class="btn btn-success" [routerLink]="['/editPayment',one._id]">edit</button></td>
+      <td *ngIf="role!='client'"><button class="btn btn-danger" (click)="delete(one._id)">delete</button></td>
+      <td><button class="btn btn-warning" (click)="generatePdf(one._id)" >generate pdf</button></td>
+      <td><button class="btn btn-info" [routerLink]="['/showPdf',one._id]">show pdf</button></td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>

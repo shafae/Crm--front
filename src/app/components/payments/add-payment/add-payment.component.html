@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="my-5">
+    <h1>
+      Add Payment
+    </h1>
+  </div>
+  <form #paymentForm="ngForm" (ngSubmit)="handleSubmit(paymentForm)">
+    <div class="row mb-3 mt-3">
+    <select class="form-select" aria-label="Default select example" (change)="selectOption($event)">
+      <option selected>select Payment Method</option>
+      <option value="cash" >cash</option>
+      <option value="quarter">quarter</option>
+      <option value="half">half</option>
+      <option value="yearly">yearly</option>
+    </select>
+    </div>
+      <div class="row mb-3 mt-3">
+          <input class="form-control in-field inputs" type="number" name="numOfYears" placeholder="Number Of Years" [(ngModel)]="payment.numOfYears" #numOfYears="ngModel" required>
+          <div class="alert alert-danger" *ngIf="numOfYears.errors?.['required'] && paymentForm.submitted && numOfYears.dirty"> required</div>
+
+      </div>
+
+      <div class="row mb-3">
+          <input class="form-control in-field inputs" type="number" name="paid" placeholder="paid" [(ngModel)]="payment.paid" #paid="ngModel" required >
+
+          <div class="alert alert-danger" *ngIf="paid.errors?.['required'] && paymentForm.submitted && paid.dirty"> required</div>
+
+      </div>
+      <div class="row mb-3">
+        <input class="form-control in-field inputs" type="number" name="left" placeholder="left" [(ngModel)]="payment.left" #left="ngModel" required >
+
+        <div class="alert alert-danger" *ngIf="left.errors?.['required'] && paymentForm.submitted && left.dirty"> required</div>
+
+    </div>
+
+
+
+      <div class="row mb-3">
+          <div class="sign-button">
+              <button class="btn btn-primary d-block" type="submit" [disabled]="paymentForm.invalid">Add</button>
+          </div>
+      </div>
+  </form>
+<br>
+</div>

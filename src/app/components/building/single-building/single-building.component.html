@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<body>
+    <div class="detail-container">
+      <ng-container *ngFor="let img of building.buildingImg ; let f = first" >
+        <img class="img" *ngIf="f" src="http://localhost:3000/{{img}}">
+      </ng-container>
+        <div class="detail-item">
+            <p class="product-detail product-title">building number: {{building.buildNum}}</p>
+            <p class="product-detail product-title">number of floors: {{building.floorsNum}}</p>
+            <p class="product-detail product-title">area: {{building.area}}</p>
+
+                  <button class="add-btn btn btn-primary " [routerLink]="['/units',building._id]" >show Units</button>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+<div class="container">
+  <h2 class="my-5">Edit Building</h2>
+  <form #buildForm="ngForm" (ngSubmit)="handleSubmit(buildForm , building.projectId)">
+      <div class="row mb-3 mt-3">
+          <input class="form-control in-field inputs" type="number" name="BuildingNum" placeholder="Building Number" [(ngModel)]="building.buildNum" #BuildingNum="ngModel" >
+      </div>
+      <div class="row mb-3 mt-3">
+        <input class="form-control in-field inputs" type="text" name="area" placeholder="project Name" [(ngModel)]="building.area" #area="ngModel" >
+    </div>
+    <div class="row mb-3 mt-3">
+      <input class="form-control in-field inputs" type="number" name="floorsNum" placeholder="floors Number" [(ngModel)]="building.floorsNum" #floorsNum="ngModel" >
+  </div>
+
+      <div class="row mb-3">
+          <div class="sign-button">
+              <button class="btn btn-primary d-block" type="submit">edit</button>
+          </div>
+      </div>
+  </form>

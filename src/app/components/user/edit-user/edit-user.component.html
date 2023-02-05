@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="my-5">
+    <h1>Edit User</h1>
+  </div>
+    <form #reg="ngForm" (ngSubmit)="handleSubmit(reg)">
+        <div class="row mb-3 mt-3">
+            <input class="form-control in-field inputs" type="text" name="firstName" placeholder="First Name" [(ngModel)]="userForm.fName" #firstName="ngModel" minlength="3" maxlength="20">
+            <div class=" alert alert-danger in-field " *ngIf="firstName.errors?.['minlength']"> minimum 3 characters</div>
+            <div class="alert alert-danger in-field " *ngIf="firstName.errors?.['maxlength']"> maximum 20 character</div>
+        </div>
+
+        <div class="row mb-3">
+            <input class="form-control in-field inputs" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="userForm.lName" #lastName="ngModel"  minlength="3" maxlength="20">
+
+            <div class="alert alert-danger" *ngIf="lastName.errors?.['minlength']"> minimum 3 characters</div>
+            <div class="alert alert-danger" *ngIf="lastName.errors?.['maxlength']"> maximum 20 character</div>
+        </div>
+
+
+        <div class="row mb-3">
+
+            <input class="form-control in-field inputs" type="email" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="userForm.email" email>
+            <div class="alert alert-danger" *ngIf="email.errors?.['email']">
+                <p>should match the email pattern</p>
+            </div>
+
+        </div>
+        <div class="row mb-3">
+            <input class="form-control in-field inputs" type="tel" name="phone" placeholder="Phone" #phone="ngModel" [(ngModel)]="userForm.phoneNum"  minlength="11" maxlength="11">
+
+            <div class="alert alert-danger" *ngIf="phone.errors?.['maxlength']">must be 11 number</div>
+        </div>
+        <div class="row mb-3" *ngIf="role!='client'">
+          <select class="form-select in-field inputs" aria-label="Default select example" (change)="selectRole($event)" #role >
+            <option selected>select role Name</option>
+            <option *ngFor="let role of roles" [value]="role.title" >{{role.title}}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <select class="form-select in-field inputs" aria-label="Default select example" (change)="selectGender($event)" >
+            <option selected>select gender</option>
+            <option value="male" >male</option>
+            <option value="female">female</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+            <input class="form-control in-field inputs" type="number" name="age" placeholder="age" #age="ngModel" [(ngModel)]="userForm.age">
+        </div>
+
+        <div class="row mb-3">
+            <div class="sign-button">
+                <button class="btn btn-primary d-block" type="submit" [disabled]="reg.invalid">edit</button>
+            </div>
+        </div>
+    </form>
+</div>

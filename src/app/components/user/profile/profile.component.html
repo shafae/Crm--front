@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="my-5">
+    <h1>Profile</h1>
+  </div>
+  <img *ngIf="userForm.image" src="http://localhost:3000/{{userForm.image}}" class="rounded mx-auto d-block profileImg" alt="profile photo">
+        <div class="row mb-3 mt-3">
+            <input class="form-control in-field inputs" type="text" name="firstName" placeholder="First Name" [(ngModel)]="userForm.fName" readonly>
+
+        </div>
+
+        <div class="row mb-3">
+            <input class="form-control in-field inputs" type="text" name="lastName" placeholder="Last Name" [(ngModel)]="userForm.lName" #lastName="ngModel"  readonly>
+        </div>
+
+
+        <div class="row mb-3">
+
+            <input class="form-control in-field inputs" type="email" name="email" placeholder="Email" #email="ngModel" [(ngModel)]="userForm.email" readonly>
+
+        </div>
+        <div class="row mb-3">
+            <input class="form-control in-field inputs" type="tel" name="phone" placeholder="Phone" #phone="ngModel" [(ngModel)]="userForm.phoneNum"  readonly>
+        </div>
+        <div class="row mb-3">
+          <input class="form-control in-field inputs" type="text" name="role" placeholder="role" #role="ngModel" [(ngModel)]="userForm.roleName"  readonly>
+      </div>
+      <div class="row mb-3">
+        <input class="form-control in-field inputs" type="text" name="gender" placeholder="gender" #gender="ngModel" [(ngModel)]="userForm.gender"  readonly>
+    </div>
+
+
+        <div class="row mb-3">
+            <input class="form-control in-field inputs" type="number" name="age" placeholder="age" #age="ngModel" [(ngModel)]="userForm.age" readonly>
+        </div>
+
+<div class="row my-5">
+<div class=" col-6 mb-3 mt-3 w-25 ">
+  <button class="btn btn-info " routerLink="/profilePicture"> edit profile picture</button>
+</div>
+<div class=" col-6 mb-3 mt-3 w-25 ">
+  <button class="btn btn-warning " [routerLink]="['/changePassword']"> change password</button>
+</div>
+<div class=" col-6 mb-3 mt-3 w-25 s-3">
+  <button class="btn btn-success " [routerLink]="['/editUser',userForm._id]"> edit profile</button>
+</div>
+</div>
+</div>

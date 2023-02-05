@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="my-5">
+    <h1>All Users</h1>
+  </div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">user name</th>
+      <th scope="col">email</th>
+      <th scope="col">phone</th>
+      <th scope="col">role Name</th>
+      <th scope="col">edit</th>
+      <th scope="col">delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let one of users, let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{one.fName}} {{one.lName}}</td>
+      <td>{{one.email}}</td>
+      <td>{{one.phoneNum}}</td>
+      <td>{{one.roleName}}</td>
+      <td><button class="btn btn-success" [routerLink]="['/editUser',one._id]">edit</button></td>
+      <td><button class="btn btn-danger" (click)="delete(one._id)">delete</button></td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>

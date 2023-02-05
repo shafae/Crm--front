@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 class="my-5">Edit Unit</h2>
+  <form #projectForm="ngForm" (ngSubmit)="handleSubmit(projectForm,unit.buildingId)">
+      <div class="row mb-3 mt-3">
+          <input class="form-control in-field inputs" type="number" name="unitNum" placeholder="unit Number" [(ngModel)]="unit.unitNum" #unitNum="ngModel" >
+      </div>
+      <div class="row mb-3 mt-3">
+        <input class="form-control in-field inputs" type="number" name="price" placeholder="price" [(ngModel)]="unit.price" #price="ngModel" >
+    </div>
+    <div class="row mb-3">
+      <select class="form-select in-field inputs" aria-label="Default select example" (change)="selectOption($event)">
+        <option selected>Unit status</option>
+        <option value="bought" >bought</option>
+        <option value="available">available</option>
+      </select>
+    </div>
+      <div class="row mb-3">
+          <div class="sign-button">
+              <button class="btn btn-primary d-block" type="submit">edit</button>
+          </div>
+      </div>
+  </form>

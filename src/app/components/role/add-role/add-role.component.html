@@ -1,0 +1,47 @@
+<div class="container">
+  <form #roleForm="ngForm" (ngSubmit)="handleSubmit(roleForm)">
+      <div class="row mb-3 mt-3">
+          <input class="form-control in-field inputs" type="text" name="roleTitle" placeholder="Role Title" ngModel #roleTitle="ngModel" required (change)="onchange($event)">
+          <div class="alert alert-danger" *ngIf="roleTitle.errors?.['required'] && roleForm.submitted"> required</div>
+
+      </div>
+
+      <div class="row mb-3">
+          <div class="sign-button">
+              <button class="btn btn-primary d-block" type="submit" [disabled]="roleForm.invalid">Add</button>
+          </div>
+      </div>
+  </form>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Role title</th>
+      <th scope="col">edit</th>
+      <th scope="col">delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let one of roles, let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{one.title}}</td>
+      <td>
+         <form class="row" #editRole="ngForm" (ngSubmit)="edit(one._id)">
+        <div class="col-6">
+            <input type="text" class="form-control"  (change)="onchange($event)" >
+        </div>
+        <div class="col-4">
+            <button class="btn btn-success">
+                edit
+            </button>
+        </div>
+      </form></td>
+      <td><button class="btn btn-danger" (click)="delete(one._id)">delete</button></td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>

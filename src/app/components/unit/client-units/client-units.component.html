@@ -1,0 +1,22 @@
+<div class="container">
+  <h2 class="my-5">Units</h2>
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Unit Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Unit payments</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let unit of units, let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{unit.unitNum}}</td>
+        <td>{{unit.price}}</td>
+        <td><button class="btn btn-info" [routerLink]="['/getUnitPayments',unit._id]" *ngIf="unit.clientId&&unit.status=='bought'">show payments</button></td>
+      </tr>
+
+    </tbody>
+  </table>
+  </div>

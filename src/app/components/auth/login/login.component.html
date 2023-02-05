@@ -1,0 +1,39 @@
+<div class="container mt-3" id="mainDiv">
+  <div class="my-5">
+    <h1>
+      login
+    </h1>
+  </div>
+    <form #loginForm="ngForm" (ngSubmit)="handleSubmit(loginForm)">
+
+
+        <div class="row mb-3 loginDiv">
+            <label for="email" class="form-label" name="username">Email</label>
+            <input #email="ngModel" type="email" class="form-control " name="email" [(ngModel)]="model.email" required email/>
+
+            <div class="alert alert-danger" *ngIf="email.errors?.['required']&&email.dirty">
+                <h3>email is required</h3>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="row mb-3 loginDiv">
+            <label for="exampleInputEmail1" class="form-label">password</label>
+            <input #password="ngModel" type="password" class="form-control" name="password" [(ngModel)]="model.password" required />
+            <div class="alert alert-danger" *ngIf="password.errors?.['required']&&(password.dirty)">
+                <h3>password is required</h3>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" [disabled]="loginForm.invalid" class="btn btn-primary btn-type-primary">
+        login
+      </button>
+        </div>
+    </form>
+
+    <div class="col-12 alert alert-danger" *ngIf="errorFlag">
+        {{errorMsg}}
+    </div>
+</div>

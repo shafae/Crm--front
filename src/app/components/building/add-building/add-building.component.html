@@ -1,0 +1,72 @@
+<div class="container">
+  <div class="my-5">
+    <h1>
+      Add Building
+    </h1>
+  </div>
+  <form #buildingForm="ngForm" (ngSubmit)="handleSubmit(buildingForm)">
+      <div class="row mb-3 mt-3">
+          <input class="form-control in-field inputs" type="number" name="buildingNum" placeholder="Building Number" [(ngModel)]="building.buildNum" #buildNum="ngModel" required>
+          <div class="alert alert-danger" *ngIf="buildNum.errors?.['required'] && buildingForm.submitted && buildNum.dirty"> required</div>
+
+      </div>
+
+      <div class="row mb-3">
+          <input class="form-control in-field inputs" type="text" name="area" placeholder="Area" [(ngModel)]="building.area" #area="ngModel" required >
+
+          <div class="alert alert-danger" *ngIf="area.errors?.['required'] && buildingForm.submitted  && area.dirty"> required</div>
+
+      </div>
+
+      <div class="row mb-3">
+        <input class="form-control in-field inputs" type="text" name="floorsNum" placeholder="Floors Number" [(ngModel)]="building.floorsNum" #floorsNum="ngModel" required >
+
+        <div class="alert alert-danger" *ngIf="floorsNum.errors?.['required'] && buildingForm.submitted  && floorsNum.dirty"> required</div>
+
+    </div>
+
+      <div class="row mb-3">
+          <div class="sign-button">
+              <button class="btn btn-primary d-block" type="submit" [disabled]="buildingForm.invalid">Add</button>
+          </div>
+      </div>
+  </form>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">building Name</th>
+      <th scope="col">floors Number</th>
+      <th scope="col">upload images</th>
+      <th scope="col">Add Unit</th>
+      <th scope="col">edit</th>
+      <th scope="col">delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let build of buildings, let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{build.buildNum}}{{build.area}}</td>
+      <td>{{build.floorsNum}}</td>
+      <td><form class="row" #fileUpload="ngForm" (ngSubmit)="handleUpload(build._id)">
+        <div class="col-6">
+            <input type="file" class="form-control" (change)="handleChange($event)" multiple>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-primary" type="submit">
+                upload
+            </button>
+        </div>
+      </form></td>
+      <td><button class="btn btn-primary" [routerLink]="['/addUnit',build._id]">add</button></td>
+      <td><button class="btn btn-success" [routerLink]="['/editBuilding',build._id]">edit</button></td>
+      <td><button class="btn btn-danger" (click)="delete(build._id)">delete</button></td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>
+

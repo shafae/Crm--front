@@ -1,0 +1,22 @@
+<div class="row justify-content-center">
+  <div class="col-6" *ngIf="loadFlag">
+    <img src="assets/images/loading-gif.gif" class="w-100">
+  </div>
+</div>
+
+<ng-container *ngIf="!loadFlag">
+  <div class="row mt-3 gy-5 mr-2 ml-2">
+  <div class="col-4" *ngFor="let item of units">
+    <div class="card" [routerLink]="['/unit',item._id]">
+      <ng-container *ngFor="let img of item.unitImg ; let f = first" >
+        <img class="card-img-top imgHeight" *ngIf="f" src="http://localhost:3000/{{img}}">
+
+</ng-container>
+      <div class="card-body">
+        <h3>Unit: {{item.unitNum}}</h3>
+      </div>
+    <h3></h3>
+    </div>
+  </div>
+</div>
+</ng-container>

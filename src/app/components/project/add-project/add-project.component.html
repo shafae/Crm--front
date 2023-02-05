@@ -1,0 +1,68 @@
+<div class="container">
+  <div class="my-5">
+    <h1>
+      Add Project
+    </h1>
+  </div>
+  <form #projectForm="ngForm" (ngSubmit)="handleSubmit(projectForm)">
+      <div class="row mb-3 mt-3">
+          <input class="form-control in-field inputs" type="text" name="projectName" placeholder="project Name" [(ngModel)]="project.projectName" #projectName="ngModel" required>
+          <div class="alert alert-danger" *ngIf="projectName.errors?.['required'] && projectForm.submitted && projectName.dirty"> required</div>
+
+      </div>
+
+      <div class="row mb-3">
+        <select class="form-select in-field inputs" aria-label="Default select example" (change)="selectType($event)" required>
+          <option selected>select Project Type</option>
+          <option value="buy" >buy</option>
+          <option value="show">show</option>
+        </select>
+      </div>
+
+
+
+      <div class="row mb-3">
+          <div class="sign-button">
+              <button class="btn btn-primary d-block" type="submit" [disabled]="projectForm.invalid">Add</button>
+          </div>
+      </div>
+  </form>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">project Name</th>
+      <th scope="col">project Type</th>
+      <th scope="col">upload images</th>
+      <th scope="col">Add Building</th>
+      <th scope="col">edit</th>
+      <th scope="col">delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pro of projects, let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{pro.projectName}}</td>
+      <td>{{pro.type}}</td>
+      <td>
+         <form class="row" #fileUpload="ngForm" (ngSubmit)="handleUpload(pro._id)">
+        <div class="col-6">
+            <input type="file" class="form-control" (change)="handleChange($event)" multiple>
+        </div>
+        <div class="col-4">
+            <button class="btn btn-primary">
+                upload
+            </button>
+        </div>
+      </form></td>
+      <td ><button class="btn btn-primary" [routerLink]="['/addBuilding',pro._id]">add</button></td>
+      <td><button class="btn btn-success" [routerLink]="['/editProject',pro._id]">edit</button></td>
+      <td><button class="btn btn-danger" (click)="delete(pro._id)">delete</button></td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>

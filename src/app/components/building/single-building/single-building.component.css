@@ -1,0 +1,42 @@
+img {
+  border-radius: 10px;
+  width: 1000px;
+}
+
+
+.detail-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 64px;
+}
+
+.detail-item {
+  margin-left: 128px;
+  margin-right: 128px;
+}
+
+
+.product-detail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  max-width: 1024px;
+  margin-bottom: 10px;
+}
+
+.product-title {
+  font-size: 30px!important;
+  font-weight: bold;
+}
+
+.add-btn {
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+}
+
+.add-btn:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

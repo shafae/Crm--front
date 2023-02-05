@@ -1,0 +1,85 @@
+<div class="container">
+  <h2 class="my-5">Add Unit</h2>
+
+  <form #unitForm="ngForm" (ngSubmit)="handleSubmit(unitForm)">
+      <div class="row mb-3 mt-3">
+          <input class="form-control in-field inputs" type="number" name="unitNum" placeholder="Unit Number" [(ngModel)]="unit.unitNum" #unitNum="ngModel" required>
+          <div class="alert alert-danger" *ngIf="unitNum.errors?.['required'] && unitForm.submitted && unitNum.dirty"> required</div>
+
+      </div>
+
+      <div class="row mb-3">
+        <select class="form-select in-field inputs" aria-label="Default select example" (change)="selectOption($event)">
+          <option selected>Unit status</option>
+          <option value="bought" >bought</option>
+          <option value="available">available</option>
+        </select>
+      </div>
+
+      <div class="row mb-3">
+        <input class="form-control in-field inputs" type="number" name="Price" placeholder="Price" [(ngModel)]="unit.price" #Price="ngModel" required >
+
+        <div class="alert alert-danger" *ngIf="Price.errors?.['required'] && unitForm.submitted && Price.dirty"> required</div>
+
+    </div>
+
+      <div class="row mb-3">
+          <div class="sign-button">
+              <button class="btn btn-primary d-block" type="submit" [disabled]="unitForm.invalid">Add</button>
+          </div>
+      </div>
+  </form>
+<br>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Unit Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">Price</th>
+      <th scope="col">upload images</th>
+      <th scope="col">buy Unit</th>
+      <th scope="col">addPayment</th>
+      <th scope="col">Unit payments</th>
+      <th scope="col">edit</th>
+      <th scope="col">delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let unit of units, let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{unit.unitNum}}</td>
+      <td>{{unit.status}}</td>
+      <td>{{unit.price}}</td>
+      <td><form class="row" #fileUpload="ngForm" (ngSubmit)="handleUpload(unit._id)">
+        <div class="col-6">
+            <input type="file" class="form-control" (change)="handleChange($event)">
+        </div>
+        <div class="col-4">
+            <button class="btn btn-primary">
+                upload
+            </button>
+        </div>
+      </form></td>
+      <td> <form class="row" #editRole="ngForm" (ngSubmit)="buyUnit(unit._id)" *ngIf="unit.status=='available'">
+        <div class="col-6">
+            <input type="text" class="form-control" placeholder="Client Email" (change)="onchange($event)" >
+        </div>
+        <div class="col-4">
+            <button class="btn btn-success">
+                buy
+            </button>
+        </div>
+      </form></td>
+      <td><button class="btn btn-warning" [routerLink]="['/addPayment',unit._id,unit.clientId]" *ngIf="unit.clientId &&unit.status=='bought'">Add Payment</button></td>
+      <td><button class="btn btn-info" [routerLink]="['/getUnitPayments',unit._id]" *ngIf="unit.clientId&&unit.status=='bought'">show payments</button></td>
+      <td><button class="btn btn-success" [routerLink]="['/editUnit',unit._id]">edit</button></td>
+      <td><button class="btn btn-danger" (click)="delete(unit._id)">delete</button></td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>
+

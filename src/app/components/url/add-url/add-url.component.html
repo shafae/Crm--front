@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="my-5">
+    <h1>
+      Add URL
+    </h1>
+  </div>
+  <form #urlForm="ngForm" (ngSubmit)="handleSubmit(urlForm)">
+      <div class="row mb-3 mt-3">
+          <input class="form-control in-field inputs" type="text" name="link" placeholder="link" [(ngModel)]="url.link" #link="ngModel" required>
+          <div class="alert alert-danger" *ngIf="link.errors?.['required'] && urlForm.submitted && link.dirty"> required</div>
+      </div>
+
+      <div class="row mb-3">
+          <input class="form-control in-field inputs" type="text" name="methods" placeholder="method" [(ngModel)]="url.methods" #methods="ngModel"  >
+
+      </div>
+
+      <div class="row mb-3">
+        <input class="form-control in-field inputs" type="text" name="queries" placeholder="queries" [(ngModel)]="url.queries" #queries="ngModel"  >
+
+
+    </div>
+
+    <div class="row mb-3">
+      <input class="form-control in-field inputs" type="text" name="params" placeholder="params" [(ngModel)]="url.params" #params="ngModel"  >
+  </div>
+
+  <div class="row mb-3">
+    <input class="form-control in-field inputs" type="text" name="roles" placeholder="roles" [(ngModel)]="url.roles" #roles="ngModel"  >
+</div>
+
+      <div class="row mb-3">
+          <div class="sign-button">
+              <button class="btn btn-primary d-block" type="submit" [disabled]="urlForm.invalid">Add</button>
+          </div>
+      </div>
+  </form>
+<hr>
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Link</th>
+      <th scope="col">methods</th>
+      <th scope="col">queries</th>
+      <th scope="col">params</th>
+      <th scope="col">roles</th>
+      <th scope="col">add role</th>
+      <th scope="col">edit</th>
+      <th scope="col">delete</th>
+
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let one of urls, let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>{{one.link}}</td>
+      <td><p *ngFor="let method of one.methods"> {{method}}</p></td>
+      <td><p *ngFor="let query of one.queries"> {{query}}</p></td>
+      <td><p *ngFor="let param of one.params"> {{param}}</p></td>
+      <td><p *ngFor="let role of one.roles"> {{role}}</p></td>
+      <td> <form class="row" #editRole="ngForm" (ngSubmit)="addRole(one._id)">
+        <div class="col-6">
+            <input type="text" class="form-control"  (change)="onchange($event)" >
+        </div>
+        <div class="col-4">
+            <button class="btn btn-success">
+                Add role
+            </button>
+        </div>
+      </form></td>
+      <td><button class="btn btn-success" [routerLink]="['/editUrl',one._id]">edit</button></td>
+      <td><button class="btn btn-danger" (click)="delete(one._id)">delete</button></td>
+
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+

@@ -1,0 +1,17 @@
+<div class="container">
+  <h2 class="my-5">Edit project</h2>
+  <form #projectForm="ngForm" (ngSubmit)="handleSubmit(projectForm)">
+      <div class="row mb-3 mt-3">
+          <input class="form-control in-field inputs" type="text" name="projectName" placeholder="project Name" [(ngModel)]="project.projectName" #projectName="ngModel" >
+      </div>
+      <select class="form-select mb-3" aria-label="Default select example" (change)="selectOption($event)">
+        <option selected>Project Type</option>
+        <option value="buy" >buy</option>
+        <option value="show">show</option>
+      </select>
+      <div class="row mb-3">
+          <div class="sign-button">
+              <button class="btn btn-primary d-block" type="submit">edit</button>
+          </div>
+      </div>
+  </form>
